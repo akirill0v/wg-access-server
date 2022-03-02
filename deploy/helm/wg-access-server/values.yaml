@@ -13,11 +13,13 @@ web:
     type: ClusterIP
 
 wireguard:
+  enabled: true
   config:
     privateKey: ""
   service:
     sessionAffinity: ClientIP
     type: ClusterIP
+    port: 51820
 
 persistence:
   enabled: false

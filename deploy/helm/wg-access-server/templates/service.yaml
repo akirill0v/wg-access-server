@@ -47,9 +47,12 @@ spec:
   loadBalancerIP: {{ .Values.wireguard.service.loadBalancerIP }}
 {{- end }}
   ports:
-    - port: 51820
-      targetPort: 51820
+    - port: {{ .Values.wireguard.service.port }}
+      targetPort: {{ .Values.wireguard.service.port }}
       protocol: UDP
       name: wireguard
+      {{- if eq .Values.wireguard.service.type "NodePort" }}
+      nodePort: {{ .Values.wireguard.service.port }}
+      {{- end }}
   selector:
     {{- include "wg-access-server.selectorLabels" . | nindent 4 }}
